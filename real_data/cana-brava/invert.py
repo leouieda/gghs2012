@@ -11,13 +11,16 @@ z = -height
 y, x = lon*111000, lat*111000
 
 bounds = (x.min(), x.max(), y.min(), y.max(), z.min() + 1, 10000)
-mesh = ft.msh.ddd.PrismMesh(bounds, (20, 100, 100))
+mesh = ft.msh.ddd.PrismMesh(bounds, (30, 70, 70))
 mesh.carvetopo(x, y, height)
 
 dms = ft.pot.harvester.wrapdata(mesh, x, y, z, gz=data)
 
-seeds = ft.pot.harvester.sow(ft.pot.harvester.loadseeds('seeds.json'),
-    mesh, mu=1, delta=0.0001)
+seeds = ft.pot.harvester.sow(ft.pot.harvester.loadseeds('seeds-larger.json'),
+    mesh, mu=1, delta=0.00001)
+seeds.extend(
+    ft.pot.harvester.sow(ft.pot.harvester.loadseeds('seeds-smaller.json'),
+        mesh, mu=1, delta=0.00005))
 
 ft.vis.figure3d()
 ft.vis.prisms([s.get_prism() for s in seeds], 'density')

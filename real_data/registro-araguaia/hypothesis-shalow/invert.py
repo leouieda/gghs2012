@@ -18,7 +18,7 @@ mesh.carvetopo(x, y, height)
 dms = ft.pot.harvester.wrapdata(mesh, x, y, z, gz=data)
 
 seeds = ft.pot.harvester.sow(ft.pot.harvester.loadseeds('seeds.json'),
-    mesh, mu=1, delta=0.00001)
+    mesh, mu=1, delta=0.00005)
 
 ft.vis.figure3d()
 ft.vis.prisms([s.get_prism() for s in seeds], 'density')

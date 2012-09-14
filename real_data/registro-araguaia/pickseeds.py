@@ -11,6 +11,7 @@ y, x, height, data = np.loadtxt('gravity-anomaly.dat', unpack=True,
 x, y = x*1000, y*1000
 area = [y.min(), y.max(), x.min(), x.max()]
 
+# Got the density from the paper Dutra, Marangoni, and Junqueira-Brod (2012)
 density = 300
 
 ft.vis.figure()

@@ -5,20 +5,20 @@ import numpy as np
 log = ft.log.tofile(ft.log.get(), 'invert.log')
 log.info(ft.log.header())
 
-y, x, height, data = np.loadtxt('gravity-anomaly.dat', unpack=True,
+y, x, height, data = np.loadtxt('../gravity-anomaly.dat', unpack=True,
     usecols=[2, 3, 4, 6])
 # Convert from km to m
 x, y = x*1000, y*1000
 z = -height
 
-bounds = (x.min(), x.max(), y.min(), y.max(), z.min() + 1, 20000)
-mesh = ft.msh.ddd.PrismMesh(bounds, (60, 50, 50))
+bounds = (x.min(), x.max(), y.min(), y.max(), z.min() + 1, 25000)
+mesh = ft.msh.ddd.PrismMesh(bounds, (25, 50, 40))
 mesh.carvetopo(x, y, height)
 
 dms = ft.pot.harvester.wrapdata(mesh, x, y, z, gz=data)
 
 seeds = ft.pot.harvester.sow(ft.pot.harvester.loadseeds('seeds.json'),
-    mesh, mu=0.01, delta=0.0001)
+    mesh, mu=0.1, delta=0.00001)
 
 ft.vis.figure3d()
 ft.vis.prisms([s.get_prism() for s in seeds], 'density')
@@ -53,8 +53,8 @@ ft.vis.show()
 
 ft.vis.figure3d()
 ft.vis.prisms([s.get_prism() for s in seeds], 'density')
-#ft.vis.prisms(ft.msh.ddd.vremove(0, 'density', mesh), 'density')
-ft.vis.prisms(mesh, 'density')
+ft.vis.prisms(ft.msh.ddd.vremove(0, 'density', mesh), 'density')
+#ft.vis.prisms(mesh, 'density')
 ft.vis.axes3d(ft.vis.outline3d(bounds), fmt='%.1f', nlabels=3,
     ranges=[b*0.001 for b in bounds])
 ft.vis.wall_bottom(bounds)

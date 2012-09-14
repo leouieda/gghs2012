@@ -1,6 +1,8 @@
 
 all: result.pickle
 
+plot:
+	python plot.py
 
 seeds: pickseeds.py
 	python pickseeds.py

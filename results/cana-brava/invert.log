@@ -1,8 +1,8 @@
 INFO:fatiando: ########################################
 Fatiando a Terra:
-  date: Thu Sep 13 15:30:14 2012
+  date: Sat Sep 22 15:54:45 2012
   version: 0.1.dev1
-  changeset: 04e9d1dc459f
+  changeset: 11c1ad20a4fe
 ########################################
 INFO:fatiando.msh.ddd: Generating 3D right rectangular prism mesh:
 INFO:fatiando.msh.ddd:   bounds = (x1, x2, y1, y2, z1, z2) = (-1521961.8043899536, -1413676.8465042114, -5398176.1322021484, -5325718.5516357422, -812.24052282055254, 10000)
@@ -33,5 +33,5 @@ INFO:fatiando.pot.harvester:   iterate: False
 INFO:fatiando.pot.harvester:   initial goal function: 0.997524
 INFO:fatiando.pot.harvester:   final goal function: 1356.68
 INFO:fatiando.pot.harvester:   total number of accretions: 10551
-INFO:fatiando.pot.harvester:   average time per accretion: 0h 0m 0.00643s
-INFO:fatiando.pot.harvester:   total time for inversion: 0h 1m 7.85000s
+INFO:fatiando.pot.harvester:   average time per accretion: 0h 0m 0.00675s
+INFO:fatiando.pot.harvester:   total time for inversion: 0h 1m 11.17000s

@@ -1,0 +1,5 @@
+syntax: glob
+
+*.pickle
+predicted.txt
+presentation/.~lock.*

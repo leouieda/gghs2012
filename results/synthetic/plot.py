@@ -18,7 +18,7 @@ data = [gz, gzz]
 size = (5, 4)
 units = ['mGal', 'Eotvos']
 fmt = '.png'
-dpi = 600
+dpi = 150
 for i in xrange(2):
     # Just the data
     ft.vis.figure(figsize=size)

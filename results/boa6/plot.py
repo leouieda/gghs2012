@@ -5,25 +5,63 @@ import cPickle as pickle
 x, y, height, z, gxx, gxy, gxz, gyy, gyz, gzz = np.loadtxt('data.xyz').T
 predicted = np.loadtxt('predicted.txt', unpack=True)[2:]
 
+with open('seeds.pickle') as f:
+    seeds = pickle.load(f)
+sx, sy = np.transpose([s.center()[:2] for s in seeds])
+
+titles = ['gyz', 'gzz']
+size = (5, 5)
+fmt = '.png'
+dpi = 150
 shape = (100, 100)
 data = [gyz, gzz]
-titles = ['gyz', 'gzz']
+def adjust():
+    #ft.vis.subplots_adjust(right=0.96, bottom=0.15)
+    pass
+n = 10
 for i in range(2):
-    ft.vis.figure()
+    # Just the data
+    ft.vis.figure(figsize=size)
+    adjust()
     ft.vis.title(titles[i])
     ft.vis.axis('scaled')
-    levels = ft.vis.contourf(y, x, data[i], shape, 15, interp=True)
-    ft.vis.colorbar()
-    ft.vis.contour(y, x, predicted[i], shape, levels, color='k', interp=True)
-    ft.vis.xlabel('East (km)')
-    ft.vis.ylabel('North (km)')
+    levels = ft.vis.contourf(y, x, data[i], shape, n, interp=True)
+    cb = ft.vis.colorbar(shrink=1)
+    cb.set_label('Eotvos')
+    ft.vis.xlabel('Easting (km)')
+    ft.vis.ylabel('Northing (km)')
     ft.vis.m2km()
-ft.vis.show()
+    ft.vis.savefig(titles[i] + fmt, dpi=dpi)
+    # The data + seeds
+    ft.vis.figure(figsize=size)
+    adjust()
+    ft.vis.title(titles[i])
+    ft.vis.axis('scaled')
+    levels = ft.vis.contourf(y, x, data[i], shape, n, interp=True)
+    cb = ft.vis.colorbar(shrink=1)
+    cb.set_label('Eotvos')
+    ft.vis.plot(sy, sx, 'ok')
+    ft.vis.xlabel('Easting (km)')
+    ft.vis.ylabel('Northing (km)')
+    ft.vis.m2km()
+    ft.vis.savefig(titles[i] + '_seeds' + fmt, dpi=dpi)
+    # The fit
+    ft.vis.figure(figsize=size)
+    adjust()
+    ft.vis.title(titles[i])
+    ft.vis.axis('scaled')
+    levels = ft.vis.contourf(y, x, data[i], shape, n, interp=True)
+    cb = ft.vis.colorbar(shrink=1)
+    cb.set_label('Eotvos')
+    ft.vis.contour(y, x, predicted[i], shape, levels, color='k', interp=True)
+    ft.vis.xlabel('Easting (km)')
+    ft.vis.ylabel('Northing (km)')
+    ft.vis.m2km()
+    ft.vis.savefig(titles[i] + '_fit' + fmt, dpi=dpi)
+#ft.vis.show()
 
 with open('result.pickle') as f:
     mesh = pickle.load(f)
-with open('seeds.pickle') as f:
-    seeds = pickle.load(f)
 bounds = mesh.bounds
 
 ft.vis.figure3d()

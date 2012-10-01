@@ -8,26 +8,65 @@ path = sys.argv[1]
 
 y, x, data = np.loadtxt('gravity-anomaly.dat', unpack=True,
     usecols=[2, 3, 6])
+y, x = y*1000, x*1000
 predicted = np.loadtxt(os.path.join(path, 'predicted.txt'), unpack=True,
     usecols=[-1])
 
-shape = (100, 100)
-ft.vis.figure()
-ft.vis.title("True: color | Inversion: contour")
+with open(os.path.join(path, 'seeds.pickle')) as f:
+    seeds = pickle.load(f)
+sx, sy = np.transpose([s.center()[:2] for s in seeds])
+
+fmt = '.png'
+dpi = 200
+size = (5.6, 4)
+shape = (200, 200)
+
+ft.vis.figure(figsize=size)
+ft.vis.subplots_adjust(bottom=0.12)
+ft.vis.title("Bouguer anomaly")
+ft.vis.axis('scaled')
+levels = ft.vis.contourf(y, x, data, shape, 20, interp=True)
+cb = ft.vis.colorbar(shrink=0.86)
+cb.set_label('mGal')
+ft.vis.plot(y, x, 'xk')
+ft.vis.xlabel('East (km)')
+ft.vis.ylabel('North (km)')
+ft.vis.m2km()
+ft.vis.savefig('gz' + fmt, dpi=dpi)
+
+ft.vis.figure(figsize=size)
+ft.vis.subplots_adjust(bottom=0.12)
+ft.vis.title("Bouguer anomaly")
+ft.vis.axis('scaled')
+levels = ft.vis.contourf(y, x, data, shape, 20, interp=True)
+cb = ft.vis.colorbar(shrink=0.86)
+cb.set_label('mGal')
+ft.vis.plot(sy, sx, 'ok', markersize=8)
+ft.vis.xlabel('East (km)')
+ft.vis.ylabel('North (km)')
+ft.vis.m2km()
+ft.vis.savefig('gz_seed' + fmt, dpi=dpi)
+
+ft.vis.figure(figsize=size)
+ft.vis.subplots_adjust(bottom=0.12)
+ft.vis.title("Bouguer anomaly")
 ft.vis.axis('scaled')
 levels = ft.vis.contourf(y, x, data, shape, 12, interp=True)
-ft.vis.colorbar()
-ft.vis.contour(y, x, predicted, shape, levels, color='k', interp=True)
-ft.vis.plot(y, x, '.w')
-ft.vis.xlabel('y (km)')
-ft.vis.ylabel('x (km)')
+cb = ft.vis.colorbar(shrink=0.86)
+cb.set_label('mGal')
+ft.vis.contour(y, x, predicted, shape, levels, color='k', interp=True,
+    linewidth=1.5)
+ft.vis.plot(y, x, 'xk')
+ft.vis.xlabel('East (km)')
+ft.vis.ylabel('North (km)')
+ft.vis.m2km()
+ft.vis.savefig('gz_fit' + fmt, dpi=dpi)
+
 ft.vis.show()
 
 
 with open(os.path.join(path, 'result.pickle')) as f:
     mesh = pickle.load(f)
-with open(os.path.join(path, 'seeds.pickle')) as f:
-    seeds = pickle.load(f)
 bounds = mesh.bounds
 
 ft.vis.figure3d()

@@ -5,7 +5,20 @@ import numpy as np
 log = ft.log.tofile(ft.log.get(), 'invert.log')
 log.info(ft.log.header())
 
-x, y, height, z, gxx, gxy, gxz, gyy, gyz, gzz = np.loadtxt('data.xyz').T
+data = np.loadtxt('/home/leo/dat/boa6/ftg/rawdata/BOA6_FTG.XYZ', unpack=True)
+# Remove the coordinates from the raw data
+data[0] -= data[0].min()
+data[1] -= data[1].min()
+area1 = [7970, 12877, 10650, 17270]
+y, x, scalars = ft.grd.cut(data[0], data[1], data[2:], area1)
+# The x and y components are switched because the coordinates are mixed up
+# (my x is their y)
+height, z, gyy, gxy, gyz, gxx, gxz, gzz = scalars
+# Remove the coordinates from the cut data
+x -= x.min()
+y -= y.min()
+# Convert altitude into z coordinates
+z *= -1
 
 bounds = (x.min(), x.max(), y.min(), y.max(), -height.max(), -200)
 mesh = ft.msh.ddd.PrismMesh(bounds, (23, 100, 135))

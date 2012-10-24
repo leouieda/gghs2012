@@ -4,7 +4,7 @@ all: result.pickle
 plot:
 	python plot.py
 
-result.pickle: invert.py seeds.json data.xyz
+result.pickle: invert.py seeds.json
 	python invert.py
 
 clean:

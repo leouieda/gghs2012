@@ -1,0 +1,286 @@
+% Latex source for "Rapid 3D inversion of gravity and gravity gradient data
+% to test geologic hypotheses" by Leonardo Uieda and Valeria C F Barbosa
+
+\RequirePackage{fix-cm}
+
+%\documentclass[twocolumn,final]{svjour3}
+\documentclass[twocolumn,draft]{svjour3}
+%\documentclass[twocolumn,referee]{svjour3}
+
+\smartqed  % flush right qed marks, e.g. at end of proof
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[round,sort]{natbib}
+
+\journalname{International Association of Geodesy Symposia}
+
+
+
+\begin{document}
+
+\title{
+    Rapid 3D inversion
+    of gravity and gravity gradient data
+    to test geologic hypotheses
+}
+\author{Leonardo Uieda \and Val\'eria C. F. Barbosa}
+
+%\subtitle{Do you have a subtitle?\\ If so, write it here}
+%\titlerunning{Short form of title}        % if too long for running head
+%\authorrunning{Short form of author list} % if too long for running head
+
+\institute{
+    L. Uieda \and V.C.F. Barbosa \at
+        Observat\'orio Nacional,
+        Rua General Jos\'e Cristino 77,
+        20921-400 Rio de Janeiro - RJ, Brazil.
+        \email{leouieda@gmail.com; valcris@on.br}
+}
+
+\date{Received:  / Accepted: }
+
+\maketitle
+
+\begin{abstract}
+% Note: Max 250 words
+Forward modeling of potential fields
+is a useful way to incorporate the interpreter's knowledge
+about the geology of the interpretation area into the model.
+However, this can be a very tedious task.
+This is specially true when modeling in 3D
+and trying to fit multiple components,
+e.g., in gravity gradiometry.
+The interpreter is required
+to simultaneously supervise the data fit
+and the construction of geologically realistic 3D bodies.
+This problem is partially solved
+by methods of geophysical inversion,
+which automatically fit the data.
+Conversely,
+inverse problems introduce other challenges of their own.
+Most geophysical inverse problems are ill-posed
+because their solutions are neither unique nor stable.
+Thus, they require the introduction of prior information,
+usually through regularizing functions.
+Moreover, 3D inverse problems are very computationally expensive.
+Recent developments in potential field inversion
+have proposed different regularizing functions
+to transform the ill-posed problem into a well-posed one.
+Also, several techniques,
+like data compression and parallel computation,
+have been applied to overcome the computational complexity.
+We call attention to
+the method of potential field inversion
+by planting anomalous densities.
+This method uses an iterative algorithm
+to automatically grow the anomalous bodies
+around user-specified prismatic elements called ``seeds'',
+which have fixed density contrasts and positions.
+These seeds provide a first estimate
+of the skeletal outlines of the presumed anomalous bodies.
+Then, the inversion iteratively concentrates mass around this ``skeleton''
+in a way that both fits the observed data and yields compact bodies.
+Therefore,
+the interpreter can easily impose prior information
+on the inversion through the seeds.
+The interpreter needs only to supply a few seeds
+that specify the sources' skeleton,
+eliminating the exhaustive task
+of specifying the complete geometry of multiple sources.
+Moreover, the interpreter is liberated
+from the time-consuming procedure
+of yielding a reasonable fit to the data.
+Due to its high computational efficiency,
+the method of planting anomalous densities
+can be used to quickly test geologic hypothesis
+of different locations and density contrasts
+for presumed sources.
+To test a hypothesis,
+one would choose
+the locations and density contrasts of the seeds accordingly
+and verify if the inversion result
+is able to fit the observed data.
+If it is not able,
+then the hypothesis can be rejected
+and a new one can be formulated and tested.
+Otherwise, there is no reason to reject the hypothesis
+on the basis of the geophysical data.
+Thus, the method can be viewed as a an enhanced forward modeling.
+The method of planting anomalous densities
+can be used with both gravity and gravity gradient data.
+This makes it an ideal tool
+to interpret compact geologic bodies
+using the new generation GOCE data.
+We present  applications to synthetic and real data
+that illustrate the usefulness of our method.
+
+\keywords{
+    Gravity inversion \and
+    Gravity gradiometry \and
+    Modeling \and
+    3D \and
+    GOCE
+}
+\end{abstract}
+
+% INTRODUCTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{intro}
+
+Forward modeling of potential fields
+is a useful way to incorporate the interpreter's knowledge
+about the geology of the interpretation area into the model.
+However, this can be a very tedious task.
+This is specially true when modeling in 3D
+and trying to fit multiple components,
+e.g., in gravity gradiometry.
+The interpreter is required
+to simultaneously supervise the data fit
+and the construction of geologically realistic 3D bodies.
+This problem is partially solved
+by methods of geophysical inversion,
+which automatically fit the data.
+Conversely,
+inverse problems introduce other challenges of their own.
+Most geophysical inverse problems are ill-posed
+because their solutions are neither unique nor stable.
+Thus, they require the introduction of prior information,
+usually through regularizing functions.
+Moreover, 3D inverse problems are very computationally expensive.
+Recent developments in potential field inversion
+have proposed different regularizing functions
+to transform the ill-posed problem into a well-posed one.
+Also, several techniques,
+like data compression and parallel computation,
+have been applied to overcome the computational complexity.
+We call attention to
+the method of potential field inversion
+by planting anomalous densities.
+This method uses an iterative algorithm
+to automatically grow the anomalous bodies
+around user-specified prismatic elements called ``seeds'',
+which have fixed density contrasts and positions.
+These seeds provide a first estimate
+of the skeletal outlines of the presumed anomalous bodies.
+Then, the inversion iteratively concentrates mass around this ``skeleton''
+in a way that both fits the observed data and yields compact bodies.
+Therefore,
+the interpreter can easily impose prior information
+on the inversion through the seeds.
+The interpreter needs only to supply a few seeds
+that specify the sources' skeleton,
+eliminating the exhaustive task
+of specifying the complete geometry of multiple sources.
+Moreover, the interpreter is liberated
+from the time-consuming procedure
+of yielding a reasonable fit to the data.
+Due to its high computational efficiency,
+the method of planting anomalous densities
+can be used to quickly test geologic hypothesis
+of different locations and density contrasts
+for presumed sources.
+To test a hypothesis,
+one would choose
+the locations and density contrasts of the seeds accordingly
+and verify if the inversion result
+is able to fit the observed data.
+If it is not able,
+then the hypothesis can be rejected
+and a new one can be formulated and tested.
+Otherwise, there is no reason to reject the hypothesis
+on the basis of the geophysical data.
+Thus, the method can be viewed as a an enhanced forward modeling.
+The method of planting anomalous densities
+can be used with both gravity and gravity gradient data.
+This makes it an ideal tool
+to interpret compact geologic bodies
+using the new generation GOCE data.
+We present  applications to synthetic and real data
+that illustrate the usefulness of our method.
+
+% METHODOLOGY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Methodology}
+\label{method}
+
+Text with citations \cite{RefB} and \cite{RefJ}.
+
+\section{Example application}
+\label{application}
+as required. Don't forget to give each section
+and subsection a unique label (see Sect.~\ref{method}).
+
+\begin{equation}
+a^2+b^2=c^2
+\end{equation}
+
+% For one-column wide figures use
+\begin{figure}
+% Use the relevant command to insert your figure file.
+% For example, with the graphicx package use
+  %\includegraphics{example.eps}
+% figure caption is below the figure
+\caption{Please write your figure caption here}
+\label{fig:1}       % Give a unique label
+\end{figure}
+
+% For two-column wide figures use
+\begin{figure*}
+% Use the relevant command to insert your figure file.
+% For example, with the graphicx package use
+  %\includegraphics[width=0.75\textwidth]{example.eps}
+% figure caption is below the figure
+\caption{Please write your figure caption here}
+\label{fig:2}       % Give a unique label
+\end{figure*}
+
+% For tables use
+\begin{table}
+% table caption is above the table
+\caption{Please write your table caption here}
+\label{tab:1}       % Give a unique label
+% For LaTeX tables use
+\begin{tabular}{lll}
+\hline\noalign{\smallskip}
+first & second & third  \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+number & number & number \\
+number & number & number \\
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{table}
+
+% CONCLUSIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+\label{conclusions}
+
+% ACKNOWLEDGEMENTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{acknowledgements}
+If you'd like to thank anyone, place your comments here
+and remove the percent signs.
+\end{acknowledgements}
+
+
+% REFERENCES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{}
+
+\bibitem[Cartwright, 2007]{RefB}
+Cartwright J (2007) Big stars have weather too. IOP Publishing PhysicsWeb.
+http://physicsweb.org/articles/news/11/6/16/1. Accessed 26 June 2007
+
+\bibitem[Gamelin et~al., 2009]{RefJ}
+Gamelin FX, Baquet G, Berthoin S, Thevenet D, Nourry C, Nottin S, Bosquet L
+(2009) Effect of high intensity intermittent training on heart rate variability
+in prepubescent children. Eur J Appl Physiol 105:731-738.
+doi: 10.1007/s00421-008-0955-8
+
+
+\end{thebibliography}
+
+\end{document}
+

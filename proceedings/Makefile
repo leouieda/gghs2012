@@ -8,7 +8,14 @@ all: ${OUTPUT}
 ${OUTPUT}: ${NAME}.tex ${FIGS}
 	pdflatex ${NAME}.tex
 	pdflatex ${NAME}.tex
+	pdflatex ${NAME}.tex
 	mv ${NAME}.pdf ${OUTPUT}
+
+latex:
+	latex ${NAME}.tex
+	latex ${NAME}.tex
+	latex ${NAME}.tex
+	dvipdf ${NAME}.dvi ${OUTPUT}
 
 wordcount: ${NAME}.tex
 	@detex $< | wc -w
@@ -28,4 +35,4 @@ proof:
 	@-bash bin/passive ${NAME}.tex;
 
 clean:
-	rm -rf ${OUTPUT} *.aux *.bbl *.log *.blg
+	rm -rf ${OUTPUT} *.aux *.bbl *.log *.blg *.dvi

@@ -26,7 +26,6 @@
 }
 \author{Leonardo Uieda \and Val\'eria C. F. Barbosa}
 
-%\subtitle{Do you have a subtitle?\\ If so, write it here}
 %\titlerunning{Short form of title}        % if too long for running head
 %\authorrunning{Short form of author list} % if too long for running head
 
@@ -60,18 +59,19 @@ Meh
 
 \begin{sloppypar}
 Forward modeling of potential fields
-is a useful way generate geophysical models
+is a useful way to generate geophysical models
 that incorporate the interpreter's knowledge
 about the regional and local geology.
-However, this can be a tedious process,
-specially when modeling in 3D
-and/or trying to fit multiple data components,
-e.g., in gravity gradiometry.
-The task of simultaneously
+However,
+when modeling in 3D
+and/or trying to fit multiple data components
+(e.g., in gravity gradiometry),
+forward modeling can be a tedious task.
+That is because the interpreter is
+tasked with simultaneously
 constructing geologically realistic models
-and supervising the data fit
-is imposed on the interpreter.
-
+and supervising the data fit.
+\\\indent
 These problems are partially solved
 by methods of geophysical inversion,
 which automatically fit the data.
@@ -82,7 +82,7 @@ because their solutions are neither unique nor stable.
 Thus, they require the introduction of prior information,
 usually through regularizing functions \citep{silva_potinversion}.
 Moreover, 3D inverse problems are computationally expensive.
-
+\\\indent
 Recent developments in potential field inversion
 have proposed different regularizing functions
 to transform the ill-posed problem into a well-posed one
@@ -93,8 +93,9 @@ several techniques have been applied
 to overcome the computational complexity,
 like data compression \citep{zhdanov_compression, li_compression},
 lazy evaluation of the sensitivity matrix \citep{uieda_planting},
-and moving footprint and parallel computation \citep{cuma_largescale}.
-
+moving footprint \citep{cox_footprint},
+and parallel computation \citep{cuma_largescale}.
+\\\indent
 We call attention
 to the method called ``planting anomalous densities''
 of \citet{uieda_planting}
@@ -114,49 +115,30 @@ in a way that both
 fits the observed data
 and yields compact bodies.
 Therefore,
-the interpreter can easily impose prior information
-on the inversion through these seeds.
-% PAREI AQUI
-The interpreter needs only to supply a few seeds
-that specify the sources' skeleton,
+these seeds allow the interpreter to impose
+prior geologic and geophysical information
+on the inversion.
+The interpreter needs only to supply the seeds
+that specify the body's skeleton,
 eliminating the exhaustive task
-of specifying the complete geometry of multiple sources.
-
-Moreover, the interpreter is liberated
+of specifying the complete geometry
+of multiple bodies.
+Moreover,
+the interpreter is liberated
 from the time-consuming procedure
 of yielding a reasonable fit to the data.
-
-Due to its high computational efficiency,
-the method of planting anomalous densities
-can be used to quickly test geologic hypothesis
+This allows the use
+of more than one type of data
+without any added effort.
+\\\indent
+The computational efficiency
+of the method of planting anomalous densities
+allows it be used to quickly test geologic hypothesis
 of different locations and density contrasts
 for presumed sources.
-
-To test a hypothesis,
-one would choose
-the locations and density contrasts of the seeds accordingly
-and verify if the inversion result
-is able to fit the observed data.
-
-If it is not able,
-then the hypothesis can be rejected
-and a new one can be formulated and tested.
-
-Otherwise, there is no reason to reject the hypothesis
-on the basis of the geophysical data.
-
-Thus, the method can be viewed as a an enhanced forward modeling.
-
-The method of planting anomalous densities
-can be used with both gravity and gravity gradient data.
-
-This makes it an ideal tool
-to interpret compact geologic bodies
-using the new generation GOCE data.
-
-We present  applications to synthetic and real data
-that illustrate the usefulness of our method.
-
+We illustrate this hypothesis testing procedure
+with an application
+to the Registro do Araguaia gravity anomaly, Brazil.
 \end{sloppypar}
 
 % METHODOLOGY
@@ -216,8 +198,15 @@ number & number & number \\
 % ACKNOWLEDGEMENTS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{acknowledgements}
-If you'd like to thank anyone, place your comments here
-and remove the percent signs.
+We acknowledge the use of software
+matplotlib by \citet{matplotlib} and
+Mayavi by \citet{mayavi}.
+The authors were supported in this research by
+a fellowship (VCFB) from CNPq
+and a scholarship (LU) from CAPES, Brazil.
+Additional support for the authors
+was provided by the Brazilian agencies
+CNPq (grant 471693/2011-1) and FAPERJ (grant E-26/103.175/2011).
 \end{acknowledgements}
 
 
@@ -225,10 +214,20 @@ and remove the percent signs.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{thebibliography}{}
 
+\bibitem[Cox et~al., 2010]{cox_footprint}
+Cox LH, Wilson G a., Zhdanov MS (2010)
+3D inversion of airborne electromagnetic data using a moving footprint.
+Exploration Geophysics 41:250-259. doi: 10.1071/EG10003
+
 \bibitem[\v{C}uma et~al., 2012]{cuma_largescale}
 \v{C}uma M, Wilson G a., Zhdanov MS, Cuma M (2012)
 Large-scale 3D inversion of potential field data. Geophysical Prospecting.
 doi: 10.1111/j.1365-2478.2011.01052.x
+
+\bibitem[Hunter, 2007]{matplotlib}
+Hunter JD (2007)
+Matplotlib: A 2D Graphics Environment. Computing in Science \& Engineering
+9:90-95. doi: 10.1109/MCSE.2007.55
 
 \bibitem[Last and Kubik, 1983]{last_kubik}
 Last BJ, Kubik K (1983)
@@ -250,6 +249,11 @@ Martins CM, Lima WA, Barbosa VCF, Silva JBC (2011)
 Total variation regularization for depth-to-basement estimate:
 Part 1 - Mathematical details and applications. Geophysics 76:I1-I12.
 doi: 10.1190/1.3524286
+
+\bibitem[Ramachandran and Varoquaux, 2011]{mayavi}
+Ramachandran P, Varoquaux G (2011)
+Mayavi: 3D Visualization of Scientific Data. Computing in Science \& Engineering
+13:40-51. doi: 10.1109/MCSE.2011.35
 
 \bibitem[Ren\'e, 1986]{rene}
 Ren\'e RM (1986)

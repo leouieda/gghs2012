@@ -80,11 +80,11 @@ inverse problems introduce other challenges of their own.
 Most geophysical inverse problems are ill-posed
 because their solutions are neither unique nor stable.
 Thus, they require the introduction of prior information,
-usually through regularizing functions \citep{silva_potinversion}.
+usually through regularization \citep{silva_potinversion}.
 Moreover, 3D inverse problems are computationally expensive.
 \\\indent
 Recent developments in potential field inversion
-have proposed different regularizing functions
+have proposed different types of regularization
 to transform the ill-posed problem into a well-posed one
 \citep[e.g.,][]{last_kubik, li_oldenburg, zhdanov_focusing, silva_interactive,
 silvadias_adaptive, martins_tv}.
@@ -106,17 +106,17 @@ It uses an iterative algorithm
 to automatically grow the anomalous bodies
 around user-specified prismatic elements called ``seeds'',
 which have fixed density contrasts and positions.
-These seeds provide a ``first estimate''
-of the skeletal outlines of the presumed geologic bodies.
-Then,
-the inversion iteratively concentrates mass
+Thus, the seeds provide
+a skeletal outline of the presumed geologic bodies.
+The inversion algorithm concentrates mass
 around this ``skeleton''
 in a way that both
 fits the observed data
 and yields compact bodies.
 Therefore,
-these seeds allow the interpreter to impose
-prior geologic and geophysical information
+these seeds provide
+a way for the interpreter
+to impose prior geologic and geophysical information
 on the inversion.
 The interpreter needs only to supply the seeds
 that specify the body's skeleton,

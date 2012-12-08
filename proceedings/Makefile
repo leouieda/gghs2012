@@ -1,24 +1,25 @@
+.PHONY=pdflatex latex wordcount proof clean
 NAME=uieda_barbosa
-OUTPUT=uieda_barbosa.pdf
 FIGS=
 
-all: ${OUTPUT}
+latex: ${NAME}.dvi
+pdflatex: ${NAME}.pdf
 
-
-${OUTPUT}: ${NAME}.tex ${FIGS}
+${NAME}.pdf: ${NAME}.tex ${FIGS}
 	pdflatex ${NAME}.tex
 	pdflatex ${NAME}.tex
 	pdflatex ${NAME}.tex
-	mv ${NAME}.pdf ${OUTPUT}
 
-latex:
+${NAME}.dvi: ${NAME}.tex ${FIGS}
 	latex ${NAME}.tex
 	latex ${NAME}.tex
 	latex ${NAME}.tex
-	dvipdf ${NAME}.dvi ${OUTPUT}
 
-wordcount: ${NAME}.tex
-	@detex $< | wc -w
+dvi2pdf: ${NAME}.dvi
+	dvipdf ${NAME}.dvi
+
+wordcount:
+	@detex ${NAME}.tex | wc -w
 
 proof:
 	@echo ""
@@ -35,4 +36,4 @@ proof:
 	@-bash bin/passive ${NAME}.tex;
 
 clean:
-	rm -rf ${OUTPUT} *.aux *.bbl *.log *.blg *.dvi
+	rm -rf ${NAME}.pdf ${NAME}.dvi *.aux *.bbl *.log *.blg

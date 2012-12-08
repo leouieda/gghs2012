@@ -1,10 +1,10 @@
-% Latex source for "Rapid 3D inversion of gravity and gravity gradient data
-% to test geologic hypotheses" by Leonardo Uieda and Valeria C F Barbosa
+% Latex source for:
+%   "Rapid 3D inversion of gravity and gravity gradient data to test geologic
+%    hypotheses" by Leonardo Uieda and Valeria C F Barbosa
 
 \RequirePackage{fix-cm}
-
-%\documentclass[twocolumn,final]{svjour3}
-\documentclass[twocolumn,draft]{svjour3}
+\documentclass[twocolumn,final]{svjour3}
+%\documentclass[twocolumn,draft]{svjour3}
 %\documentclass[twocolumn,referee]{svjour3}
 
 \smartqed  % flush right qed marks, e.g. at end of proof
@@ -13,12 +13,16 @@
 \usepackage{amsmath}
 \usepackage[round,sort]{natbib}
 
+% Custom commands
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+
 \journalname{International Association of Geodesy Symposia}
-
-
 
 \begin{document}
 
+% TITLE AND AUTHORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{
     Rapid 3D inversion
     of gravity data
@@ -41,9 +45,13 @@
 
 \maketitle
 
+% ABSTRACT AND KEYWORDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 % Note: Max 250 words
 Meh
+
+
 \keywords{
     Gravity inversion \and
     Gravity gradiometry \and
@@ -145,14 +153,203 @@ to the Registro do Araguaia gravity anomaly, Brazil.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Methodology}
 
-Meh
+\begin{sloppypar}
 
-\section{Example application}
+The method of planting anomalous densities \citep{uieda_planting}
+solves the inverse problem
+of estimating an anomalous density distribution
+(geologic bodies)
+from observed data.
+It constructs a solution
+using an iterative algorithm.
 
+
+
+
+Let us assume that there are $N_{c}$ types of observations available (e.g.,
+the gravitational attraction and/or some combination of the components of the
+gravity gradient tensor).
+Now, let $\vect{g}^{\thinspace k}$, $k=1,\ldots,N_{c}$, be a vector with
+$L$ observations of one of these types of data.
+We assume that $\vect{g}^{\thinspace k}$ is caused by an anomalous density
+distribution in the subsurface.
+We discretize the subsurface into an interpretative model consisting of $M$
+juxtaposed right rectangular prisms with homogeneous densities.
+It follows that $\vect{g}^{\thinspace k}$ can be approximated by the sum of the
+contribution of each prism.
+In matrix notation, this relation is given by
 
 \begin{equation}
-a^2+b^2=c^2
+    \vect{d}^{\thinspace k} = \mat{A}^{k}~\vect{p},
+    \label{eq:forward}
 \end{equation}
+
+where $\vect{d}^{\thinspace k}$, $k=1,\ldots,N_{c}$, is the $L$-dimensional
+predicted data vector,
+$\vect{p}$ is the $M$-dimensional parameter vector whose $j$th element is the
+density of the $j$th prism, and $\mat{A}^{k}$, $k=1,\ldots,N_{c}$, is the
+$L \times M$ sensitivity matrix.
+The elements of the sensitivity matrix can be calculated using the formula of
+%\citet{Nagy2000}.
+\\[0.2cm]
+The misfit between $\vect{g}^{\thinspace k}$ and $\vect{d}^{\thinspace k}$ can
+be expressed through the normalized $\ell_{2}$-norm data-misfit function
+
+\begin{equation}
+    \phi^{k}(\vect{p}) = \sqrt{
+    \dfrac{
+        \sum\limits_{i=1}^{L}
+        \left( g_{i}^{\thinspace k} - d_{i}^{\thinspace k} \right)^{2}
+    }{
+        \sum\limits_{i=1}^{L}\left(g_{i}^{\thinspace k}\right)^{2}}}.
+    \label{eq:phik}
+\end{equation}
+
+Another measure of this misfit is the ``shape-of-anomaly'' function of
+\citet{rene}
+
+\begin{equation}
+    \psi^{\thinspace k}(\vect{p}) = \sqrt{
+        \sum\limits_{i=1}^{L}
+        \left(\alpha^{\thinspace k} g_{i}^{\thinspace k} - d_{i}^{\thinspace k}
+        \right)^{2}
+    },
+    \label{eq:shapek}
+\end{equation}
+
+where $\alpha^{\thinspace k}$, $k=1,\ldots,N_{c}$, is a scale factor.
+The shape-of-anomaly function, as its name suggests, measures only the
+difference in shape between the observed and predicted data.
+If the two data have the same shape, they will differ only by a factor of
+$\alpha^{\thinspace k}$.
+Thus, the optimum value for $\alpha^{\thinspace k}$ is the one that minimizes
+$\psi^{\thinspace k}$ (equation \ref{eq:shapek}) \citep{rene}.
+For a given predicted data vector $\vect{d}^{\thinspace k}$
+(equation \ref{eq:forward}), the value of
+$\alpha^{\thinspace k}$ is calculated by differentiating $\psi^{\thinspace k}$
+with respect to $\alpha^{\thinspace k}$ and equating the result to zero,
+i.e.,
+
+\begin{equation}
+    \dfrac{\partial \psi^{\thinspace k}}{\partial \alpha^{\thinspace k}} =
+    \dfrac{\alpha^{\thinspace k}
+        \sum\limits_{i=1}^{L}\left(g_{i}^{\thinspace k}\right)^{2} +
+        \sum\limits_{i=1}^{L} g_{i}^{\thinspace k}d_{i}^{\thinspace k}}
+        {\sqrt{\sum\limits_{i=1}^{L}
+        \left(\alpha^{\thinspace k} g_{i}^{\thinspace k} - d_{i}^{\thinspace k}
+        \right)^{2}}} = 0~.
+\end{equation}
+
+Hence, before evaluating function $\psi^{\thinspace k}$ (equation
+\ref{eq:shapek}), $\alpha^{\thinspace k}$ can be calculated by \citep{rene}
+
+\begin{equation}
+    \alpha^{\thinspace k} = \dfrac{
+        \sum\limits_{i=1}^{L} g_{i}^{\thinspace k} d_{i}^{\thinspace k}
+    }{
+        \sum\limits_{i=1}^{L}\left( g_{i}^{\thinspace k}\right)^{2}
+    }.
+    \label{eq:alpha}
+\end{equation}
+
+We can then define the total data-misfit function as the sum of the individual
+data-misfit functions (equation \ref{eq:phik}) of each type of data available,
+i.e.,
+
+\begin{equation}
+    \Phi(\vect{p}) = \sum\limits_{k=1}^{N_{c}} \phi^{k}(\vect{p}),
+    \label{eq:phi}
+\end{equation}
+
+and, likewise, total shape-of-anomaly function as
+
+\begin{equation}
+    \Psi(\vect{p}) = \sum\limits_{k=1}^{N_{c}} \psi^{\thinspace k}(\vect{p}).
+    \label{eq:shape}
+\end{equation}
+
+From now on, we follow the methodology of \citet{uieda_planting}, in which the
+solution is iteratively built by the accretion of prisms to user-specified
+``seeds''.
+These seeds are prisms of the interpretative model with given density contrasts.
+Before the iterative growth process starts, all elements of the parameter vector
+$\vect{p}$ are set to zero.
+Next, the elements of $\vect{p}$ corresponding to the seeds are assigned the
+density contrasts of the respective seeds (Figure~\ref{fig:sketch}a).
+The growth process is then started.
+An iteration of the growth process consists of attempting to grow, one at a
+time, each of the $N_{s}$ seeds (Figure~\ref{fig:sketch}b).
+A seed grows by attempting to perform the accretion of one of its neighboring
+prisms (i.e., prisms that share a face).
+We define the accretion of a prism as changing its density contrast from zero to
+the density contrast of the respective seed undergoing the accretion.
+In order to be chosen for accretion, a neighboring prism must satisfy two
+criteria:
+
+\begin{enumerate}
+    \item The accretion of a prism must decrease the total data-misfit
+    function $\Phi(\vect{p})$ (equation \ref{eq:phi}) and satisfy the condition
+    \begin{equation}
+        \dfrac{|\Phi_{(new)} - \Phi_{(old)}|}{\Phi_{(old)}} \ge \delta ,
+        \label{eq:delta}
+    \end{equation}
+    where $\Phi_{(new)}$ is the value of $\Phi(\vect{p})$ evaluated with the
+    prism included in the estimate, $\Phi_{(old)}$ is the previous value of
+    $\Phi(\vect{p})$, and $\delta$ is a small positive constant that controls
+    how much the solution is allowed to grow.
+
+    \item The accretion of a prism must produce the smallest value of the goal
+    function $\Gamma(\vect{p})$ out of all other prisms that satisfy the first
+    criterion. Unlike \citet{uieda_planting}, we define the goal function as
+    \begin{equation}
+        \Gamma(\vect{p}) = \Psi(\vect{p}) + \mu\theta(\vect{p}),
+        \label{eq:goal}
+    \end{equation}
+    where $\Psi(\vect{p})$ is the total shape-of-anomaly function (equation
+    \ref{eq:shape}), $\mu$ is a regularizing parameter, and $\theta(\vect{p})$
+    is a modified version of the regularizing function of \citet{uieda_planting}
+    \begin{equation}
+        \theta(\vect{p}) = \frac{1}{f} \sum\limits_{j=1}^{M}
+        \dfrac{p_j}{p_j + \epsilon} l_{j},
+        \label{eq:regul}
+    \end{equation}
+    where $p_{j}$, $j=1,\ldots,M$, is the $j$th element of parameter vector
+    $\vect{p}$,
+    $\epsilon$ is a small positive constant, $l_{j}$ is the distance between the
+    $j$th prism and the seed which performed its accretion, and $f$ is a scaling
+    factor equal to the mean extent of the interpretative model
+    (the region in the subsurface to be interpreted).
+    In practice, $\epsilon$ is not needed because one could simply sum $l_{j}$
+    or zero when evaluating the regularizing function.
+\end{enumerate}
+
+If none of the neighboring prisms of a seed satisfy these criteria, the
+seed does not grow during this iteration.
+The growth process continues while at least one seed is able to grow
+(Figure~\ref{fig:sketch}c).
+\citet{uieda_animation} provide an animation of a growth process performed on
+synthetic data using the method of \citet{uieda_planting}.
+\\[0.2cm]
+We emphasize that the full sensitivity matrices $\mat{A}^{k}$ are not needed
+at any single time during the inversion process.
+Therefore, the ``lazy evaluation'' of the sensitivity matrices
+proposed in \citet{uieda_planting} is still possible
+in our modified algorithm, making the inversion fast and memory efficient.
+\\[0.2cm]
+For clarity, the modified planting algorithm proposed here will be henceforth
+referred to as the shape-of-anomaly planting algorithm.
+\end{sloppypar}
+
+\begin{figure}
+    \includegraphics{fig/method}
+    \caption{Please write your figure caption here}
+    \label{fig:method}
+\end{figure}
+
+% APPLICATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example application}
+
 
 % For one-column wide figures use
 \begin{figure}

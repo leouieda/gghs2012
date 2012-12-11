@@ -270,7 +270,29 @@ until none are able
 to add a neighboring prism (Figure \ref{fig:method}d).
 This happens when
 none of the neighboring prisms
-fullfil the first criterion.
+fulfill the first criterion.
+Thus,
+the inversion algorithm
+performs a systematic search
+restricted to the neighboring
+prisms of the current solution.
+An advanted of this restriction
+is that it allows
+the implementation of a lazy evaluation
+of the sensitivity matrix
+\citep{uieda_planting}.
+In software development,
+the lazy evaluation of a function
+means only evaluating its result
+once the result is required.
+In the case of the sensitivity matrix,
+its columns are only required
+once the corresponding prisms of the mesh
+become neighboring prisms
+of the current solution.
+Thus, these columns can be evaluated lazily,
+making the inversion algorithm
+fast and memory efficient.
 \end{sloppypar}
 
 \begin{figure}
@@ -332,6 +354,19 @@ Exploration Geophysics 41:250-259. doi: 10.1071/EG10003
 \v{C}uma M, Wilson G a., Zhdanov MS, Cuma M (2012)
 Large-scale 3D inversion of potential field data. Geophysical Prospecting.
 doi: 10.1111/j.1365-2478.2011.01052.x
+
+\bibitem[Dutra and Marangoni, 2009]{dutra_morroengenho}
+Dutra AC, Marangoni YR (2009)
+Gravity and magnetic 3D inversion of Morro do Engenho complex, Central Brazil.
+Journal of South American Earth Sciences 28:193-203.
+doi: 10.1016/j.jsames.2009.02.006
+
+\bibitem[Dutra et~al., 2012]{dutra_araguaia}
+Dutra AC, Marangoni YR, Junqueira-Brod TC (2012)
+Investigation of the Goiás Alkaline Province, Central Brazil:
+Application of gravity and magnetic methods.
+Journal of South American Earth Sciences 33:43-55.
+doi: 10.1016/j.jsames.2011.06.004
 
 \bibitem[Hunter, 2007]{matplotlib}
 Hunter JD (2007)

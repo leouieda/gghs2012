@@ -2,7 +2,7 @@
 all: result.pickle
 
 plot:
-	python plot.py
+	optirun python plot.py
 
 seeds: pickseeds.py
 	python pickseeds.py

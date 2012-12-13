@@ -10,17 +10,19 @@ lon, lat, height, data = np.loadtxt('gravity-anomaly-residual.dat', unpack=True)
 z = -height
 y, x = lon*111000, lat*111000
 
-bounds = (x.min(), x.max(), y.min(), y.max(), z.min() + 1, 10000)
-mesh = ft.msh.ddd.PrismMesh(bounds, (30, 70, 70))
+bounds = (x.min(), x.max(), y.min(), y.max(), z.min() + 1, 15000)
+#mesh = ft.msh.ddd.PrismMesh(bounds, (30, 70, 70))
+mesh = ft.msh.ddd.PrismMesh(bounds, (10, 30, 30))
 mesh.carvetopo(x, y, height)
 
 dms = ft.pot.harvester.wrapdata(mesh, x, y, z, gz=data)
 
+mu, delta = 1, 0.000001
 seeds = ft.pot.harvester.sow(ft.pot.harvester.loadseeds('seeds-larger.json'),
-    mesh, mu=1, delta=0.00001)
+    mesh, mu=mu, delta=delta)
 seeds.extend(
     ft.pot.harvester.sow(ft.pot.harvester.loadseeds('seeds-smaller.json'),
-        mesh, mu=1, delta=0.00005))
+        mesh, mu=mu, delta=delta))
 
 ft.vis.figure3d()
 ft.vis.prisms([s.get_prism() for s in seeds], 'density')
@@ -47,7 +49,7 @@ shape = (100, 100)
 ft.vis.figure()
 ft.vis.title("True: color | Inversion: contour")
 ft.vis.axis('scaled')
-levels = ft.vis.contourf(lon, lat, data, shape, 12, interp=True)
+levels = ft.vis.contourf(lon, lat, data, shape, 20, interp=True)
 ft.vis.colorbar()
 ft.vis.contour(lon, lat, predicted, shape, levels, color='k', interp=True)
 ft.vis.xlabel('Longitude')

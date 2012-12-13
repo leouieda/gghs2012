@@ -1,11 +1,12 @@
+.PHONY: wedge flat clean
 
-all: result.pickle
 
-plot:
-	python plot.py
+wedge:
+	cd wedge; optirun python invert.py
 
-result.pickle: invert.py seeds.json data.xyz
-	python invert.py
+flat:
+	cd flat; optirun python invert.py
 
 clean:
-	rm -rf *.pickle predicted.txt
+	rm -rf wedge/*.pickle wedge/predicted.txt
+	rm -rf flat/*.pickle flat/predicted.txt

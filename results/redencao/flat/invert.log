@@ -1,30 +1,37 @@
 INFO:fatiando: ########################################
 Fatiando a Terra:
-  date: Sat Sep 22 15:55:05 2012
+  date: Thu Dec 13 15:08:30 2012
   version: 0.1.dev1
-  changeset: 11c1ad20a4fe
+  changeset: 3ff8ce9151db
 ########################################
 INFO:fatiando.msh.ddd: Generating 3D right rectangular prism mesh:
 INFO:fatiando.msh.ddd:   bounds = (x1, x2, y1, y2, z1, z2) = [9071903.0, 9135445.0, 569495.4375, 634652.4375, 0, 10000]
-INFO:fatiando.msh.ddd:   shape = (nz, ny, nx) = (60, 56, 64)
-INFO:fatiando.msh.ddd:   number of prisms = 215040
-INFO:fatiando.msh.ddd:   prism dimensions = (dx, dy, dz) = (992.84375, 1163.517857142857, 166.66666666666666)
+INFO:fatiando.msh.ddd:   shape = (nz, ny, nx) = (30, 28, 32)
+INFO:fatiando.msh.ddd:   number of prisms = 26880
+INFO:fatiando.msh.ddd:   prism dimensions = (dx, dy, dz) = (1985.6875, 2327.035714285714, 333.3333333333333)
 INFO:fatiando.pot.harvester: Creating prism data modules:
 INFO:fatiando.pot.harvester:   data misfit norm: 2
 INFO:fatiando.pot.harvester:   observations per data type: 400
 INFO:fatiando.pot.harvester:   data types: gz
 INFO:fatiando.pot.harvester:   total number of observations: 400
 INFO:fatiando.pot.harvester: Generating prism seeds:
-INFO:fatiando.pot.harvester:   regularizing parameter (mu): 0.5
-INFO:fatiando.pot.harvester:   delta (threshold): 5e-05
+INFO:fatiando.pot.harvester:   regularizing parameter (mu): 0.1
+INFO:fatiando.pot.harvester:   delta (threshold): 1e-06
 INFO:fatiando.pot.harvester:   distance type: relative
 INFO:fatiando.pot.harvester:   shape-of-anomaly: True
 INFO:fatiando.pot.harvester:   seeds given: 1
 INFO:fatiando.pot.harvester:   seeds found: 1
 INFO:fatiando.pot.harvester: Harvesting inversion results from planting anomalous densities:
 INFO:fatiando.pot.harvester:   iterate: False
-INFO:fatiando.pot.harvester:   initial goal function: 0.999921
-INFO:fatiando.pot.harvester:   final goal function: 1989.46
-INFO:fatiando.pot.harvester:   total number of accretions: 18285
-INFO:fatiando.pot.harvester:   average time per accretion: 0h 0m 0.10183s
-INFO:fatiando.pot.harvester:   total time for inversion: 0h 31m 1.88000s
+INFO:fatiando.pot.harvester:   initial goal function: 0.999358
+INFO:fatiando.pot.harvester:   final goal function: 56.4637
+INFO:fatiando.pot.harvester:   total number of accretions: 2239
+INFO:fatiando.pot.harvester:   average time per accretion: 0h 0m 0.03867s
+INFO:fatiando.pot.harvester:   total time for inversion: 0h 1m 26.58000s
+INFO:fatiando: Dimensions of estimate:
+INFO:fatiando: length = 41699.4
+INFO:fatiando: width  = 44213.7
+INFO:fatiando: thick  = 6666.67
+INFO:fatiando: L/W    = 0.943134
+INFO:fatiando: W/T    = 6.63205
+INFO:fatiando: ratio  = 0.142209

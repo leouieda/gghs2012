@@ -1,12 +1,15 @@
+import sys
 import fatiando as ft
 import numpy as np
 import cPickle as pickle
 
+path = sys.argv[1]
+
 outcropx, outcropy = np.loadtxt('outcrop.xyz', unpack=True)
 x, y, data = np.loadtxt('data.xyz', unpack=True)
-predicted = np.loadtxt('predicted.txt', unpack=True, usecols=[-1])
+predicted = np.loadtxt('%s/predicted.txt' % (path), unpack=True, usecols=[-1])
 
-with open('seeds.pickle') as f:
+with open('%s/seeds.pickle' % (path)) as f:
     seeds = pickle.load(f)
 sx, sy = np.transpose([s.center()[:2] for s in seeds])
 
@@ -26,7 +29,14 @@ ft.vis.plot(outcropy, outcropx, '-r', linewidth=3)
 ft.vis.xlabel('East (km)')
 ft.vis.ylabel('North (km)')
 ft.vis.m2km()
-ft.vis.savefig('gz' + fmt, dpi=dpi)
+ft.vis.savefig('%s/gz ' % (path) + fmt, dpi=dpi)
+
+ft.vis.figure(figsize=size)
+ft.vis.title("Residuals")
+ft.vis.hist(data - predicted, bins=8, color='grey')
+ft.vis.xlabel('Residuals (mGal)')
+ft.vis.ylabel('Number')
+ft.vis.savefig('%s/residuals ' % (path) + fmt, dpi=dpi)
 
 ft.vis.figure(figsize=size)
 ft.vis.subplots_adjust(bottom=0.12)
@@ -40,7 +50,7 @@ ft.vis.plot(sy, sx, 'ok', markersize=10)
 ft.vis.xlabel('East (km)')
 ft.vis.ylabel('North (km)')
 ft.vis.m2km()
-ft.vis.savefig('gz_seed' + fmt, dpi=dpi)
+ft.vis.savefig('%s/gz_seed ' % (path) + fmt, dpi=dpi)
 
 ft.vis.figure(figsize=size)
 ft.vis.subplots_adjust(bottom=0.12)
@@ -54,11 +64,11 @@ ft.vis.contour(y, x, predicted, shape, levels, color='k', interp=True,
 ft.vis.xlabel('East (km)')
 ft.vis.ylabel('North (km)')
 ft.vis.m2km()
-ft.vis.savefig('gz_fit' + fmt, dpi=dpi)
+ft.vis.savefig('%s/gz_fit ' % (path) + fmt, dpi=dpi)
 
 ft.vis.show()
 
-with open('result.pickle') as f:
+with open('%s/result.pickle' % (path)) as f:
     mesh = pickle.load(f)
 bounds = mesh.bounds
 

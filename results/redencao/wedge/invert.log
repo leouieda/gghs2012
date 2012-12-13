@@ -1,6 +1,6 @@
 INFO:fatiando: ########################################
 Fatiando a Terra:
-  date: Thu Dec 13 15:50:42 2012
+  date: Thu Dec 13 16:41:09 2012
   version: 0.1.dev1
   changeset: 3ff8ce9151db
 ########################################
@@ -15,23 +15,23 @@ INFO:fatiando.pot.harvester:   observations per data type: 400
 INFO:fatiando.pot.harvester:   data types: gz
 INFO:fatiando.pot.harvester:   total number of observations: 400
 INFO:fatiando.pot.harvester: Generating prism seeds:
-INFO:fatiando.pot.harvester:   regularizing parameter (mu): 0.5
+INFO:fatiando.pot.harvester:   regularizing parameter (mu): 1
 INFO:fatiando.pot.harvester:   delta (threshold): 1e-06
 INFO:fatiando.pot.harvester:   distance type: relative
 INFO:fatiando.pot.harvester:   shape-of-anomaly: True
-INFO:fatiando.pot.harvester:   seeds given: 4
-INFO:fatiando.pot.harvester:   seeds found: 4
+INFO:fatiando.pot.harvester:   seeds given: 6
+INFO:fatiando.pot.harvester:   seeds found: 6
 INFO:fatiando.pot.harvester: Harvesting inversion results from planting anomalous densities:
 INFO:fatiando.pot.harvester:   iterate: False
-INFO:fatiando.pot.harvester:   initial goal function: 0.995914
-INFO:fatiando.pot.harvester:   final goal function: 83.8933
-INFO:fatiando.pot.harvester:   total number of accretions: 1006
-INFO:fatiando.pot.harvester:   average time per accretion: 0h 0m 0.00902s
-INFO:fatiando.pot.harvester:   total time for inversion: 0h 0m 9.07000s
+INFO:fatiando.pot.harvester:   initial goal function: 0.992417
+INFO:fatiando.pot.harvester:   final goal function: 120.068
+INFO:fatiando.pot.harvester:   total number of accretions: 884
+INFO:fatiando.pot.harvester:   average time per accretion: 0h 0m 0.00617s
+INFO:fatiando.pot.harvester:   total time for inversion: 0h 0m 5.45000s
 INFO:fatiando: Dimensions of estimate:
-INFO:fatiando: length = 33756.7
-INFO:fatiando: width  = 30251.5
-INFO:fatiando: thick  = 30666.7
-INFO:fatiando: L/W    = 1.11587
-INFO:fatiando: W/T    = 0.986461
-INFO:fatiando: ratio  = 1.13118
+INFO:fatiando: length = 35742.4
+INFO:fatiando: width  = 34905.5
+INFO:fatiando: thick  = 29333.3
+INFO:fatiando: L/W    = 1.02397
+INFO:fatiando: W/T    = 1.18996
+INFO:fatiando: ratio  = 0.860511

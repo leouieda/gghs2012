@@ -17,7 +17,7 @@ mesh = ft.msh.ddd.PrismMesh(bounds, (30, 28, 32))
 dms = ft.pot.harvester.wrapdata(mesh, x, y, z, gz=data)
 
 seeds = ft.pot.harvester.sow(ft.pot.harvester.loadseeds('seeds.json'), mesh,
-    mu=0.5, delta=0.000001)
+    mu=1, delta=0.000001)
 
 ft.vis.figure3d()
 ft.vis.prisms([s.get_prism() for s in seeds], 'density')
@@ -59,7 +59,7 @@ shape = (100, 100)
 ft.vis.figure()
 ft.vis.title("True: color | Inversion: contour")
 ft.vis.axis('scaled')
-levels = ft.vis.contourf(y, x, data, shape, 12, interp=True)
+levels = ft.vis.contourf(y, x, data, shape, 8, interp=True)
 ft.vis.colorbar()
 ft.vis.contour(y, x, predicted, shape, levels, color='k', interp=True)
 ft.vis.xlabel('East (km)')

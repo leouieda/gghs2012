@@ -103,7 +103,7 @@ ft.vis.savefig3d('%s/axes2.pdf' % (path))
 
 scene = ft.vis.figure3d(size=size)
 ft.vis.vtk.mlab.plot3d(outcropx, outcropy, np.zeros_like(outcropx),
-    color=(1,0,0), tube_radius=300)
+    color=(1,0,0), tube_radius=400)
 ft.vis.prisms(ft.msh.ddd.vremove(0, 'density', mesh), 'density')
 ft.vis.outline3d(bounds)
 ft.vis.wall_bottom(bounds)
@@ -124,6 +124,12 @@ setview1(scene)
 ft.vis.savefig3d('%s/seeds1.png' % (path))
 setview2(scene)
 ft.vis.savefig3d('%s/seeds2.png' % (path))
+
+scene = ft.vis.figure3d(size=size)
+ft.vis.vtk.mlab.plot3d(outcropx, outcropy, np.zeros_like(outcropx),
+    color=(1,0,0), tube_radius=400)
+ft.vis.prisms(ft.msh.ddd.vremove(0, 'density', mesh.get_layer(0)), 'density')
+ft.vis.outline3d(bounds)
 
 ft.vis.show3d()
 

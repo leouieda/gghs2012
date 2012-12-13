@@ -1,6 +1,6 @@
 INFO:fatiando: ########################################
 Fatiando a Terra:
-  date: Thu Dec 13 15:03:33 2012
+  date: Thu Dec 13 15:50:42 2012
   version: 0.1.dev1
   changeset: 3ff8ce9151db
 ########################################
@@ -26,8 +26,8 @@ INFO:fatiando.pot.harvester:   iterate: False
 INFO:fatiando.pot.harvester:   initial goal function: 0.995914
 INFO:fatiando.pot.harvester:   final goal function: 83.8933
 INFO:fatiando.pot.harvester:   total number of accretions: 1006
-INFO:fatiando.pot.harvester:   average time per accretion: 0h 0m 0.00862s
-INFO:fatiando.pot.harvester:   total time for inversion: 0h 0m 8.67000s
+INFO:fatiando.pot.harvester:   average time per accretion: 0h 0m 0.00902s
+INFO:fatiando.pot.harvester:   total time for inversion: 0h 0m 9.07000s
 INFO:fatiando: Dimensions of estimate:
 INFO:fatiando: length = 33756.7
 INFO:fatiando: width  = 30251.5

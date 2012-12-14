@@ -90,6 +90,16 @@ def setview2(scene):
     scene.scene.camera.compute_view_plane_normal()
     scene.scene.render()
 
+def setview3(scene):
+    scene.scene.parallel_projection = True
+    scene.scene.camera.position = [9101868.4334705323, 600226.74961825833, -172125.63471488922]
+    scene.scene.camera.focal_point = [9101868.4334705323, 600226.74961825833, 4826.7949218750009]
+    scene.scene.camera.view_angle = 30.0
+    scene.scene.camera.view_up = [0.99999972704944473, 0.00073885115968195961, 0.0]
+    scene.scene.camera.clipping_range = [164888.22723492782, 192565.59480201881]
+    scene.scene.camera.compute_view_plane_normal()
+    scene.scene.render()
+
 size = (1200, 1000)
 
 scene = ft.vis.figure3d(size=size)
@@ -100,6 +110,8 @@ setview1(scene)
 ft.vis.savefig3d('%s/axes1.pdf' % (path))
 setview2(scene)
 ft.vis.savefig3d('%s/axes2.pdf' % (path))
+setview3(scene)
+ft.vis.savefig3d('%s/axes3.pdf' % (path))
 
 scene = ft.vis.figure3d(size=size)
 ft.vis.vtk.mlab.plot3d(outcropx, outcropy, np.zeros_like(outcropx),
@@ -130,6 +142,8 @@ ft.vis.vtk.mlab.plot3d(outcropx, outcropy, np.zeros_like(outcropx),
     color=(1,0,0), tube_radius=400)
 ft.vis.prisms(ft.msh.ddd.vremove(0, 'density', mesh.get_layer(0)), 'density')
 ft.vis.outline3d(bounds)
+setview3(scene)
+ft.vis.savefig3d('%s/result3.png' % (path))
 
 ft.vis.show3d()
 

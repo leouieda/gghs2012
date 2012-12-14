@@ -17,7 +17,7 @@ mesh = ft.msh.ddd.PrismMesh(bounds, (30, 28, 32))
 dms = ft.pot.harvester.wrapdata(mesh, x, y, z, gz=data)
 
 seeds = ft.pot.harvester.sow(ft.pot.harvester.loadseeds('seeds.json'), mesh,
-    mu=0.1, delta=0.000001)
+    mu=0.5, delta=0.00001)
 
 ft.vis.figure3d()
 ft.vis.prisms([s.get_prism() for s in seeds], 'density')

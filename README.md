@@ -67,7 +67,7 @@ Expanded Abstracts, 1-6, doi:10.1190/segam2012-0383.1.
 This method is implemented in software
 [Fatiando a Terra](https://github.com/leouieda/fatiando).
 To run the results, you'll need the 0.1 version.
-See the [documentation](https://fatiando.readthedocs.org/en/Version0.1/)
+See the [documentation](https://fatiando.readthedocs.org/en/v0.1/)
 for instructions.
 
 If you run into any trouble trying to run the results, contact

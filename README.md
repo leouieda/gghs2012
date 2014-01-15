@@ -1,12 +1,18 @@
-# Rapid 3D inversion of gravity and gravity gradient data to test geologic hypotheses
+Slides and code for the talk given at the 2012 International Symposium on
+Gravity, Geoid and Height Systems (GGHS), in Venice, Italy.
 
-Talk given at the 2012 International Symposium on Gravity, Geoid and Height
-Systems (GGHS), in Venice, Italy.
-
-**Slides** are available on figshare:
+Slides in PDF format are available on figshare:
 [doi:10.6084/m9.figshare.156859](http://dx.doi.org/10.6084/m9.figshare.156859)
 
-## Abstract
+Citation:
+
+Uieda, L. and V. C. F. Barbosa (2012), Rapid 3D inversion of gravity and
+gravity gradient data to test geologic hypotheses, International Symposium on
+Gravity, Geoid and Height Systems.
+
+# Rapid 3D inversion of gravity and gravity gradient data to test geologic hypotheses
+
+**Leonardo Uieda and Valéria C. F. Barbosa**
 
 Forward modeling of potential fields is a useful way to incorporate the
 interpreter's knowledge about the geology of the interpretation area into the
